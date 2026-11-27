@@ -22,6 +22,8 @@ const os = require("os");
 const path = require("path");
 const readline = require("readline");
 
+const VERSION = "0.1.1";
+
 const API_BASE =
   process.env.ARIA_LINKS_API_BASE ||
   "https://rqesrbingluxyludjtrh.supabase.co/functions/v1";
@@ -232,7 +234,7 @@ async function cmdArchive(code, archived) {
 }
 
 function help() {
-  console.log(`aria-links — Aria Links from your terminal
+  console.log(`aria-links ${VERSION} — Aria Links from your terminal
 One named short link per placement. Verified real clicks only.
 
 Usage:
@@ -246,6 +248,7 @@ Usage:
   aria-links balance               Your credit balance
   aria-links archive <code>        Archive a link
   aria-links unarchive <code>      Bring an archived link back
+  aria-links --version             Print the version
   aria-links --help                This help`);
 }
 
@@ -272,6 +275,11 @@ async function main() {
       return cmdArchive(rest[0], true);
     case "unarchive":
       return cmdArchive(rest[0], false);
+    case "--version":
+    case "-v":
+    case "version":
+      console.log(`aria-links ${VERSION}`);
+      return;
     case "--help":
     case "-h":
     case "help":
